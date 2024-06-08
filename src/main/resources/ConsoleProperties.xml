@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="welcome">
+        Welcome to the Domain Name Information App!
+        
+            To get started, type in a single host name, list for all host names, export
+            to save a file out, or quit to exit the program.
+        
+
+    </entry>
+    <entry key="prompt">Enter a host name, list, export, or quit: </entry>
+    <entry key="invalid">Invalid File. Nothing written.</entry>
+    <entry key="goodbye">Goodbye!</entry>
+    <entry key="list">Listing all host names...</entry>
+    <entry key="exported">Host names exported.</entry>
+    <entry key="error">An error occurred. Please try again.</entry>
+    <entry key="export_prompt">Enter a file name to export to (formats: .xml, .json. .csv, .txt): </entry>
+
+    <entry key="exit_cmd">quit</entry>
+    <entry key="list_cmd">list</entry>
+    <entry key="export_cmd">export</entry>
+</properties>
