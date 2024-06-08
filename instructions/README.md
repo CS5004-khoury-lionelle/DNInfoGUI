@@ -1,18 +1,36 @@
 # Domain Name Information Part 2 - GUI Addition - Instructions
 
+For this assignment, you are going to extend what you did in the first part of the [Domain Name Information assignment](https://github.com/CS5004-khoury-lionelle/DNInfo/tree/main/instructions). In this part, you will be adding a GUI to the program. 
+
+"Living with your code" is a common expression used in computer science. It means when you write code you should expect to have to come back to it and work with it again. This assignment is meant to give you a sense of that by having you use the code from your previous assignment, while adding more features to that code base. 
 
 
 ## Learning Objectives
-* Practicing Test Driven Development
-* Implementing junit tests for all methods
-* Writing out in different file formats (CSV, JSON, XML, TXT)
-* "Serializing" and "Deserializing" data (converting data to a file format and back)
-* Using third party libraries to assist in serialization/deserialization (Jackson and/or Open CSV)
-* Exploring network connections in java and using them to connect to a server
-* Encapsulating data between components, making use of immutable and mutable structures where important
+* Understand the process of adding a GUI to an existing program
+* Modify existing code to work with multiple types of views / adding new features.
 
 
 ## Instructions
+
+For this assignment, you will be adding two `views` to your DNInfo application. The first view will be a console view, which we already provided in [ConsoleView.java](../src/main/java/student/view/ConsoleView.java). It assumes you are using the interface provided for the controller [IController](../src/main/java/student/controller/IController.java). The second view will be a GUI view, which you will need to implement from scratch. 
+
+Additionally, you need to modify the DNInfo command line argument options to enable both the console view and the GUI view.
+
+* `-c` or `--console` will enable the console view. 
+* `-g` or `--gui` will enable the GUI view.
+
+When the console or gui are enabled, the rest of the command line arguments are ignored except for `--data` which can still be used to specify a different data file. 
+
+Suggested Parts:
+1. Copy your code from the previous assignment into this repository. For ease, the only file we *modified* from the last template is [DNINfoApp.java](../src/main/java/student/DNInfoApp.java). The modification was moving the updated help string there, so you could use it where you want. The other files are all files we added, or the one provided in the previous template. 
+2. Modify your application to work with ConsoleView.java. We suggest that you DO NOT modify ConsoleView.java, but you may if you really want to modify it. However, our tests will run the application using the `-c` argument. It expects exact input/output. For example, we may provide the following input "export", "test.json", "quit". Which would export the full provided hosts file to test.java, and then end the program.  If the flow doesn't match, you may get very unusual errors/results in the autograder. IMPORTANT: just because a change you made breaks the autograder is not a reason to ask for it to be graded by hand! You still must follow the specified flow of the program as demonstrated in ConsoleView.java.
+   * Note: you can pass the autograder with just this part done. 
+3. Work on designing your GUI. Grading for the GUI will be based on screenshots and the TAs running your program if they don't see obvious tests/clarity in what you are providing. Your GUI **must** have the following features, but you are free to add more. 
+   * A text field for the domain name
+   * As area to display the results
+   * A button to list every item in the data file
+   * A way to export the data to another file
+
 
 > [!TIP]
 > We have once again provided a sample working program, that includes both the console and GUI version. This is a very basic GUI, you do not (nor should you) copy the design, but instead use it as a reference for minimum functionality. The weird X and . characters are just because because it is a demo version.
@@ -74,11 +92,34 @@ Note: you often don't know all the tests as you write. As such, it is alright to
 > Make sure to commit as you development. The bare minimum commits would be after every test, but you probably will have additional commits especially at the beginning. 
 
 #### :raising_hand: Implementation Tips
+Here are a few tips to help you out.
+* We found breaking up the ArgsController to be beneficial with a focus on loading the Arguments. This then allowed us to check for `-c` or `-g` and then run the appropriate view with a controller created based on the model, or if neither were provided, run the arguments as before.
+* Make sure the ConsoleView.java works before you start on the GUI.
+* The GUI is *always* easier to write in parts and test those parts. For example, we created the jframe, ran the program, and slowly started adding components. After we had the look at feel we wanted, we then added the functionality (the listeners).
+  * To design a GUI, you can use a GUI designer, or this is actually a good place for Copilot or other AI Tool. For example, you could have the following prompt. 
+  ``` Create class that extends JPanel. Inside that panel, I want a label that says 'hostname', a text field that is 20 characters long, a button that says 'search'. The search button should be the same length of the text field, and sits under it. The label should be above the text field. The panel should be 200x200 with the components centered. Each component should have a margin of 10 pixels.```
+  * This helps find the java swing awt components but **often has errors**. We then would spend time modifying the provided code, but at least, it gives you a starting point. DO NOT take it as is! Make changes, understand what it is creating. 
+* For a file chooser/dialog, you can use the JFileChooser. This is a common component in Java Swing. Here is an example of our FileChooser.
+```java
+   JFileChooser fileChooser = new JFileChooser();
+   fileChooser.setAcceptAllFileFilterUsed(false);
+   fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+   fileChooser.setDialogTitle("Export List");
+   fileChooser.setFileFilter(new FileNameExtensionFilter("XML (*.xml)", "xml"));
+   fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON (*.json)", "json"));
+   fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CSV (*.csv)", "csv"));
+   fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text (*.txt)", "txt"));
 
+   int userSelection = fileChooser.showSaveDialog(this);
 
+   if (userSelection == JFileChooser.APPROVE_OPTION) {
+   // do something
+   }
+```
 
-> [!WARNING]
-> If you modify one of our files, you need to add tests for it. If you do not modify a provided file, you don't need to add tests. This can be done without modifying our provided code, but you are welcome to modify it if it fits your overall design better. 
+### IMPORTANT! 
+HAVE FUN! You can play with features. Maybe you want to use the latitude/ longitude to display a location on a map. You are not limited to the bare minimum for this GUI. While we will only grade making sure you have all the minimum features, you can add more. If you go above and beyond, make sure to document it in the final design document - so that the TAs (and thus instructor) can see it! We also encourage sharing some of your final screen shots in Teams if you add a neat feature you want to share. 
+
  
 ### :fire: Task 3: Finish Design Document
 
@@ -114,7 +155,7 @@ When you are completed, you need to submit your code to gradescope. Go back to C
    * DesignDocument (INITIAL) sections are filled out 
    * All methods are tested with JUnit tests
    * Method contain proper javadoc comments (not just javadoc notation but proper wording in the comment)
-   * Report.md technical questions are questions answered correctly.
+   * Report.md includes screen shots documenting every feature of your GUI.
 4. Exceeds (MG)
    * Code is DRY (Don't Repeat Yourself)
       * Including making use of helping/utility classes to reduce duplication.
