@@ -14,6 +14,38 @@
 
 ## Instructions
 
+> [!TIP]
+> We have once again provided a sample working program, that includes both the console and GUI version. This is a very basic GUI, you do not (nor should you) copy the design, but instead use it as a reference for minimum functionality. The weird X and . characters are just because because it is a demo version.
+>
+> From the sample_working directory. 
+>
+> To run the GUI version, you can use the following command
+> 
+> ```
+>  bin/DNInfoGUI -g
+> ```
+> or if on windows
+> ```
+> bin\DNInfoGUI.bat -g
+> ```
+>  To run the console version, you can use the following command
+> ```
+> bin/DNInfoGUI -c
+> ```
+> or if on windows
+> ```
+>   bin\DNInfoGUI.bat -c
+> ```
+> as with before you can run help by doing
+> ```
+> bin/DNInfoGUI -h
+> ```
+> or if on windows
+> ```
+> bin\DNInfoGUI.bat -h
+> ```
+> It is worth noting the old DNINfo app functionality (command line arguments) are
+> all still there. We only added the views in this assignment. 
 
 ### :fire: Task 1: Design 
 
@@ -46,7 +78,7 @@ Note: you often don't know all the tests as you write. As such, it is alright to
 
 
 > [!WARNING]
-> If you modify one of our files, you need to add tests for it. If you do not modify a provided file, you don't need to add tests. This can be done without modifying our provided code, but you are welcome to modify it (except for the caveat about IGameList and IPlanner) if it fits your overall design better. 
+> If you modify one of our files, you need to add tests for it. If you do not modify a provided file, you don't need to add tests. This can be done without modifying our provided code, but you are welcome to modify it if it fits your overall design better. 
  
 ### :fire: Task 3: Finish Design Document
 
